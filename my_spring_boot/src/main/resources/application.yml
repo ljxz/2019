@@ -1,0 +1,44 @@
+#默认使用配置
+spring:
+  profiles:
+    active: dev
+  mvc:
+    view:
+      prefix: /templates
+      suffix: .html
+    #static-path-pattern: /**
+
+#公共配置与profiles选择无关 mapperLocations指的路径是src/main/resources
+mybatis:
+  typeAliasesPackage: com.wjsljx.model
+  mapperLocations: classpath:mapping/*.xml
+#启动默认端口
+server:
+  port: 80
+  #项目名，如果不设定，默认是 /
+ # servlet:
+ #   context-path: /mySpringBoot
+
+---
+
+#开发配置
+spring:
+  profiles: dev
+  datasource:
+    url: jdbc:mysql://localhost:6666/login?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: ljx
+    driver-class-name: com.mysql.jdbc.Driver
+    # 使用druid数据源
+    type: com.alibaba.druid.pool.DruidDataSource
+
+#日志配置
+logging:
+  pattern:
+    console: "%d - %msg%n" #     定义打印的日志格式
+  #日志存储地址
+  config: classpath:logback-boot.xml
+  #path: "logs/config"
+  #file: "my_spring_boot.log"
+  level:
+    root: info #日志级别总共有TARCE < DEBUG < INFO < WARN < ERROR < FATAL
